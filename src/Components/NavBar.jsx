@@ -7,8 +7,8 @@ const NavBar = () => {
     return (
         <>
             <div>
-                <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand href="#" className="justify-content-center">
+                <Navbar bg="dark" variant="dark" fixed="top">
+                    <Navbar.Brand href="https://github.com/sanketnighot" target="_blank" className="justify-content-center">
                             <center>
                             CGPA Counter
                             </center>

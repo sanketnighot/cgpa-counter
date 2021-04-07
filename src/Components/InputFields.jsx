@@ -26,6 +26,25 @@ const InputFields = () => {
     var [avgptr, setAvgPtr] = useState(0.0); ;
     var [avgpercent, setAvgPer] = useState(0.0) ;
 
+    const Reset = () => {
+        setSem1("");
+        setSem2("");
+        setSem3("");
+        setSem4("");
+        setSem5("");
+        setSem6("");
+        setSem7("");
+        setSem8("");
+        setpSem1("");
+        setpSem2("");
+        setpSem3("");
+        setpSem4("");
+        setpSem5("");
+        setpSem6("");
+        setpSem7("");
+        setpSem8("");
+    }
+
     const calculateAvg = () => {
         var ptrs = [parseFloat(csem1), parseFloat(csem2), parseFloat(csem3), parseFloat(csem4), parseFloat(csem5), parseFloat(csem6), parseFloat(csem7), parseFloat(csem8)];
         var totalptr = 0 ;
@@ -65,7 +84,7 @@ const InputFields = () => {
                 psem1 = (7.1*(value)+12).toPrecision(4).toString() + "%";
                 // eslint-disable-next-line
                 if (value == 0) {
-                    psem1 = "Sem Percentage"
+                    psem1 = "Sem 1 Percentage"
                 }
                 setpSem1(psem1)
             } 
@@ -95,7 +114,7 @@ const InputFields = () => {
                psem3 = (7.1*(value)+12).toPrecision(4).toString() + "%";
                // eslint-disable-next-line
                if (value == 0) {
-                    psem3 = "Sem 2 Percentage"
+                    psem3 = "Sem 3 Percentage"
                 }
                setpSem3(psem3)
             } 
@@ -251,7 +270,8 @@ const InputFields = () => {
             </InputGroup>
 
             <center>
-                <Button onClick={() =>calculateAvg()}>Get Average</Button>
+                <Button variant="success" onClick={() =>calculateAvg()}>Get Average</Button> &nbsp; &nbsp; &nbsp;
+                <Button variant="danger" onClick={() =>Reset()}>Reset</Button>
                 <br/><br/>
                 <Table striped bordered hover responsive="sm">
                     <thead>
