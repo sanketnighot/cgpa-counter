@@ -8,14 +8,22 @@ import Footer from './Components/Footer';
 function App() {
   return (
     <>
-		<NavBar/>
-
-		<Container style={{
-			marginTop : 20,
-		}}>
-			<InputFields/>
-		</Container>
-		<Footer/>
+			<div style={{width: '100%'}}>
+			<NavBar />
+			</div>
+		<div className="container">
+			
+				<div className="row" style={{marginTop : 70, scroll : true}}>
+				<Container style={{
+					marginTop : 20,
+				}}>
+					<InputFields/>
+				</Container>
+				</div>
+			
+			<Footer/>
+			<br/><br/>
+		</div>
     </>
   );
 }
