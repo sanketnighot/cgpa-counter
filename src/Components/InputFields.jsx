@@ -1,30 +1,34 @@
 import React, {useState} from 'react';
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
-import Table from 'react-bootstrap/Table'
-
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
+import Cookies from 'js-cookie';
 
 const InputFields = () => {
     
-    const [csem1, setSem1] = useState("");
-    const [csem2, setSem2] = useState("");
-    const [csem3, setSem3] = useState("");
-    const [csem4, setSem4] = useState("");
-    const [csem5, setSem5] = useState("");
-    const [csem6, setSem6] = useState("");
-    const [csem7, setSem7] = useState("");
-    const [csem8, setSem8] = useState("");
-    var [psem1, setpSem1] = useState("");
-    var [psem2, setpSem2] = useState("");
-    var [psem3, setpSem3] = useState("");
-    var [psem4, setpSem4] = useState("");
-    var [psem5, setpSem5] = useState("");
-    var [psem6, setpSem6] = useState("");
-    var [psem7, setpSem7] = useState("");
-    var [psem8, setpSem8] = useState("");
+    var [csem1, setSem1] = useState(Cookies.get("csem1") || "");
+    var [csem2, setSem2] = useState(Cookies.get("csem2") || "");
+    var [csem3, setSem3] = useState(Cookies.get("csem3") || "");
+    var [csem4, setSem4] = useState(Cookies.get("csem4") || "");
+    var [csem5, setSem5] = useState(Cookies.get("csem5") || "");
+    var [csem6, setSem6] = useState(Cookies.get("csem6") || "");
+    var [csem7, setSem7] = useState(Cookies.get("csem7") || "");
+    var [csem8, setSem8] = useState(Cookies.get("csem8") || "");
+    var [psem1, setpSem1] = useState(Cookies.get("psem1") || "");
+    var [psem2, setpSem2] = useState(Cookies.get("psem2") || "");
+    var [psem3, setpSem3] = useState(Cookies.get("psem3") || "");
+    var [psem4, setpSem4] = useState(Cookies.get("psem4") || "");
+    var [psem5, setpSem5] = useState(Cookies.get("psem5") || "");
+    var [psem6, setpSem6] = useState(Cookies.get("psem6") || "");
+    var [psem7, setpSem7] = useState(Cookies.get("psem7") || "");
+    var [psem8, setpSem8] = useState(Cookies.get("psem8") || "");
     var [avgptr, setAvgPtr] = useState(0.0); ;
     var [avgpercent, setAvgPer] = useState(0.0) ;
+    var [remember, setRemember] = useState("checked");
+    var [avgName, setAvgName] = useState("Save and Calculate Average");
+    
 
     const Reset = () => {
         setSem1("");
@@ -43,6 +47,36 @@ const InputFields = () => {
         setpSem6("");
         setpSem7("");
         setpSem8("");
+        Cookies.remove("csem1");
+        Cookies.remove("psem1");
+        Cookies.remove("csem2");
+        Cookies.remove("psem2");
+        Cookies.remove("csem3");
+        Cookies.remove("psem3");
+        Cookies.remove("csem4");
+        Cookies.remove("psem4");
+        Cookies.remove("csem5");
+        Cookies.remove("psem5");
+        Cookies.remove("csem6");
+        Cookies.remove("psem6");
+        Cookies.remove("csem7");
+        Cookies.remove("psem7");
+        Cookies.remove("csem8");
+        Cookies.remove("psem8");
+    }
+
+
+    const changeRemember = (event) => {
+        const { name, value } = event.currentTarget;
+        if (value === "checked"){
+            setRemember("notchecked");
+            setAvgName("Calculate Average");
+        }
+        else if(value === "notchecked"){
+            setRemember("checked");
+            setAvgName("Save and Calculate Average");
+        }
+        console.log(name, " : " ,value)
     }
 
     const calculateAvg = () => {
@@ -71,6 +105,45 @@ const InputFields = () => {
             setAvgPer(perc);
             setAvgPtr(avgptr);
         }
+
+        if (remember === "checked") {
+            Cookies.set("csem1", csem1);
+            Cookies.set("csem2", csem2);
+            Cookies.set("csem3", csem3);
+            Cookies.set("csem4", csem4);
+            Cookies.set("csem5", csem5);
+            Cookies.set("csem6", csem6);
+            Cookies.set("csem7", csem7);
+            Cookies.set("csem8", csem8);
+            Cookies.set("psem1", psem1);
+            Cookies.set("psem2", psem2);
+            Cookies.set("psem3", psem3);
+            Cookies.set("psem4", psem4);
+            Cookies.set("psem5", psem5);
+            Cookies.set("psem6", psem6);
+            Cookies.set("psem7", psem7);
+            Cookies.set("psem8", psem8);           
+        }
+        else{
+            Cookies.remove("csem1");
+            Cookies.remove("psem1");
+            Cookies.remove("csem2");
+            Cookies.remove("psem2");
+            Cookies.remove("csem3");
+            Cookies.remove("psem3");
+            Cookies.remove("csem4");
+            Cookies.remove("psem4");
+            Cookies.remove("csem5");
+            Cookies.remove("psem5");
+            Cookies.remove("csem6");
+            Cookies.remove("psem6");
+            Cookies.remove("csem7");
+            Cookies.remove("psem7");
+            Cookies.remove("csem8");
+            Cookies.remove("psem8");
+        }
+        
+
         
     }
 
@@ -270,7 +343,17 @@ const InputFields = () => {
             </InputGroup>
 
             <center>
-                <Button variant="success" onClick={() =>calculateAvg()}>Get Average</Button> &nbsp; &nbsp; &nbsp;
+                    <Form>
+                    <Form.Check 
+                            type="checkbox"
+                            id={`default-checkbox`}
+                            name = "RememberData"
+                            value = {remember}
+                            onChange={(event) => {changeRemember(event);}}
+                            defaultChecked
+                            label="Remember data"/>
+                    </Form> 
+                <Button variant="success" onClick={() =>calculateAvg()}>{avgName}</Button> &nbsp; &nbsp; &nbsp;
                 <Button variant="danger" onClick={() =>Reset()}>Reset</Button>
                 <br/><br/>
                 <Table striped bordered hover responsive="sm">
